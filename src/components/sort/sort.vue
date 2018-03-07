@@ -2,7 +2,9 @@
   <div style="height: 100%; margin: 0">
     <v-header :name="name" :legendArr="legendArr" :myChart="firstChart"></v-header>
     <v-filter ></v-filter>
+    <div id="main">
     <v-map ref="useMap" @map="onMap" @point="onPoint"></v-map>
+    </div>
     <div id="container">
         <div id="box1"></div>
         <div id="box2"></div>
@@ -469,6 +471,12 @@ export default{
 </script>
 
 <style>
+#main {
+  height: 100%;
+  width: 52%;
+  float: left;
+  background-color: #F5F5F5;
+}
 #container {
   width: 48%;
   height:100%;

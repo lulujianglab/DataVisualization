@@ -42,9 +42,9 @@ export default{
 
 <style>
 #allmap {
-  width: 52%;
+  /* width: 52%; */
   height: 100%;
-  float: left;
-  background-color: #F5F5F5;
+  /* float: left;
+  background-color: #F5F5F5; */
 }
 </style>

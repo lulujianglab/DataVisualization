@@ -1,9 +1,7 @@
 <template>
-<div style="height: 100%; margin: 0">
   <div id="main">
     <div id="pie"></div>
   </div>
-</div>
 </template>
 
 <script>
@@ -13,19 +11,11 @@ import echarts from 'echarts'
 export default {
   data() {
     return {
-      myChart: {},
-      pieData: {},
-      arrName: [],
-      arrSelected: {}
+      myChart: {}
     }
   },
   mounted() {
     this.getData()
-    console.log(this)
-    console.log(this.arrName)
-    this.myChart = echarts.init(document.getElementById('pie'))
-    let pieOption = this.createPieOpt(this.arrName,this.arrSelected)
-    this.myChart.setOption(pieOption)
   },
   methods: {
     getData() {
@@ -34,12 +24,11 @@ export default {
         let faultData = data.TBL_FAULT_LOG
         let receivePerson = this.removePerson(faultData)
         receivePerson = this.accumulatedPerson(receivePerson)
-        this.pieData = this.pieRawData(receivePerson)
-        console.log(this.pieData)
-        this.arrName = this.pieData.arr
-        console.log(this.arrName)
-        this.arrSelected = this.pieData.selected
-        console.log(this.arrSelected)
+        let pieData = this.pieRawData(receivePerson)
+
+        this.myChart = echarts.init(document.getElementById('pie'))
+        let pieOption = this.createPieOpt(pieData)
+        this.myChart.setOption(pieOption)
       })
     },
 
@@ -93,8 +82,7 @@ export default {
     },
 
     // 创建pie option
-    createPieOpt(arrName,arrSelected){
-      // console.log(arrName,arrSelected)
+    createPieOpt(pieData){
       let opt = {}
       return opt = {
         title: {
@@ -115,7 +103,7 @@ export default {
             right: 10,
             top: 20,
             bottom: 20,
-            selected: arrSelected
+            selected: pieData.selected
         },
         series : [
           {
@@ -123,7 +111,7 @@ export default {
               type: 'pie',
               radius : '55%',
               center: ['40%', '50%'],
-              data: arrName,
+              data: pieData.arr,
               itemStyle: {
                   emphasis: {
                       shadowBlur: 10,
@@ -146,7 +134,7 @@ export default {
 }
 #pie {
   width: 100%;
-  height: calc(100% - 100px);
-  margin-top: 15px;
+  height: 100%;
+  /* height: calc(100% - 100px); */
 }
 </style>

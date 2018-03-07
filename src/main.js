@@ -15,6 +15,10 @@ import sort from './components/sort/sort'
 // import parallel from './components/parallel/parallel'
 import parallelBD from './components/parallel/parallelBD'
 import pie from './components/pie/pie'
+import scatter from './components/scatter/scatter'
+import treemap from './components/treemap/treemap'
+import multipleMap from './components/multipleMap/multipleMap'
+import dashboard from './components/dashboard/dashboard'
 // 引入数据
 import data from '../static/data/trouble-data.js'
 
@@ -52,6 +56,18 @@ const router = new VueRouer({
   },{
     path: '/pie',
     component: pie
+  },{
+    path: '/scatter',
+    component: scatter
+  },{
+    path: '/treemap',
+    component: treemap
+  },{
+    path: '/multipleMap',
+    component: multipleMap
+  },{
+    path: '/dashboard',
+    component: dashboard
   }],
   linkActiveClass: 'active'
 })
