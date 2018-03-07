@@ -1,5 +1,8 @@
 <template>
   <div id="main">
+    <div id="title">
+      <h2>{{name}}</h2>
+    </div>
     <v-map ref="useMap" @map="onMap" @point="onPoint"></v-map>
   </div>
 </template>
@@ -15,10 +18,11 @@ export default{
       map: null,
       mPoint: null,
       ak: 'ZUONbpqGBsYGXNIYHicvbAbM',
+      name: '北京市ATM机故障聚合分布'
     }
   },
   components: {
-    'v-map': map
+    'v-map': map,
   },
   mounted() {
     MP(this.ak).then(BMap => {
@@ -105,4 +109,18 @@ export default{
   /* width: 52%;
   background-color: #F5F5F5; */
 }
+#title {
+  position: relative;
+  display: flex;
+  align-items:center;
+  height: 50px;
+  background-color: #F5F5F5;
+  width: 100%;
+ }
+
+ h2 {
+    font-size: 15px;
+    font-weight: bold;
+    /* padding-left: 20px; */
+  }
 </style>

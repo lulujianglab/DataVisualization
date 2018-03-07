@@ -40,23 +40,23 @@ export default {
       })
     },
     highlight(index) {
-      this.myChart.dispatchAction({
-        type: 'highlight',
-        seriesIndex: index
-      });
+      // this.myChart.dispatchAction({
+      //   type: 'highlight',
+      //   seriesIndex: index
+      // });
     },
     donwplay(index) {
-      this.myChart.dispatchAction({
-        type: 'downplay',
-        seriesIndex: index
-      })
+      // this.myChart.dispatchAction({
+      //   type: 'downplay',
+      //   seriesIndex: index
+      // })
     },
     legendToggle(legend) {
       legend.selected = !legend.selected
-      this.myChart.dispatchAction({
-        type: 'legendToggleSelect',
-        name: legend.name
-      })
+      // this.myChart.dispatchAction({
+      //   type: 'legendToggleSelect',
+      //   name: legend.name
+      // })
       this.changeStyle()
     },
     changeStyle() {

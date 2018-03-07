@@ -80,7 +80,7 @@ export default {
         title: {
             text: '客户银行数量情况',
             left: 'left',
-            padding:1,
+            // padding:1,
             textStyle: {
                 fontWeight: 'bold',
                 fontSize: 15
@@ -136,6 +136,7 @@ export default {
 <style>
 #main {
   height: 100%;
+  width: 100%;
   background-color: #F5F5F5;
 }
 #treemap {

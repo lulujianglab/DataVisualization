@@ -12,13 +12,13 @@ import VueRouer from 'vue-router'
 
 import line from './components/line/line'
 import sort from './components/sort/sort'
-// import parallel from './components/parallel/parallel'
 import parallelBD from './components/parallel/parallelBD'
 import pie from './components/pie/pie'
 import scatter from './components/scatter/scatter'
 import treemap from './components/treemap/treemap'
 import multipleMap from './components/multipleMap/multipleMap'
 import dashboard from './components/dashboard/dashboard'
+
 // 引入数据
 import data from '../static/data/trouble-data.js'
 
@@ -33,9 +33,9 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    count: 0,
-    color: ['#6D9EA8', '#9CC2B0', '#C98769'],
+    color: ['#9CC2B0', '#C98769','#6D9EA8', '#9CC2B0', '#C98769'],
     arr: [{name: '中国银行'},{name: '建设银行'},{name: '邮储银行'}],
+    areaArr: [{name: '石景山区'},{name: '西城区'},{name: '东城区'},{name: '朝阳区'},{name: '通州区'}],
     data: datas
   }
 });
@@ -85,6 +85,3 @@ new Vue({
 })
 
 console.log('env', process.env.NODE_ENV)
-
-// router.push('paralleBD')
-// console.log(datas)
