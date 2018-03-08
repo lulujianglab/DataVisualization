@@ -39,8 +39,7 @@ export default{
     this.init()
   },
   methods: {
-    // 初始化items的order属性
-    init() {
+    init() { // 初始化items的order属性
       this.items = document.querySelectorAll('.flex-container .item')
       for (let i = 0; i < this.items.length; i++) {
         this.items[i].dataset.order = i + 1 // 使用dataset自定义属性、值
@@ -50,8 +49,7 @@ export default{
       })
     },
 
-    // 点击事件增加active属性 原先active属性移除
-    clickChart(clickIndex) {
+    clickChart(clickIndex) { // 点击事件增加active属性 原先active属性移除
       let activeItem = document.querySelector('.flex-container .active')
       let activeIndex = activeItem.dataset.order
       let clickItem = this.items[clickIndex - 1]
@@ -63,8 +61,7 @@ export default{
       this.setStyle(clickItem, activeItem)
     },
 
-    // 移除和增加active属性的style:transform属性互换
-    setStyle(el1, el2) {
+    setStyle(el1, el2) { // 移除和增加active属性的style:transform属性互换
       let transform1 = el1.style.transform
       let transform2 = el2.style.transform
       el1.style.transform = transform2

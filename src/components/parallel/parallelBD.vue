@@ -18,16 +18,9 @@ export default{
       ak: 'ZUONbpqGBsYGXNIYHicvbAbM',
       name: "点值地图视觉优化之平行坐标图",
       legendArr: [],
-      myData: [],
-      geoCoor: [],
-      _geoCoor: [],
-      datas: [],
-      newData: [],
-      geoCoordMap: null,
-      schema: ["baidu_address","MONTH","REPORT_TIME","FINISH_TIME","CUSTOMER_NAME","FAULT_SYMPTOM","ADDRESS","AREA","TASK_STATE","DEGREE_OF_ACUTE"],
       rawData: [],
+      mapData: [],
       myChart: null,
-      option: {},
     }
   },
   components: {
@@ -38,56 +31,49 @@ export default{
     this.getData()
     MP(this.ak).then(BMap => {
       this.myChart = echarts.init(document.getElementById("container"))
-      this.option = this.createOpt(this.rawData,this.schema,this.mapData)
-      console.log(this.option)
-      this.myChart.setOption(this.option)
+      let schema = ["baidu_address","MONTH","REPORT_TIME","FINISH_TIME","CUSTOMER_NAME","FAULT_SYMPTOM","ADDRESS","AREA","TASK_STATE","DEGREE_OF_ACUTE"]
+      let option = this.createOpt(this.rawData,schema,this.mapData)
+      this.myChart.setOption(option)
     })
   },
   methods: {
     getData() {
       axios.get('../../../static/data/troubleData.json').then((res) => {
         let datas = res.data[0]
-
-        this.myData = datas.TBL_FAULT_LOG
-
-        this._geoCoor = datas.TBL_NETNODE_INFO
-        this.geoCoor = this.getNewArr(this._geoCoor)
-        this.datas = this.getGeoData(this.geoCoor,this.myData)
-        this.newData = this.getNewData(this.datas)
-
-        this.geoCoordMap = this.getGeoCoor(this.geoCoor)
-
-
-        this.rawData = this.getRawData(this.newData)
-        console.log(this.rawData)
-        this.mapData = this.makeMapData(this.geoCoordMap,this.rawData)
-        console.log(this.mapData)
+        let myData = datas.TBL_FAULT_LOG
+        let geoCoor = datas.TBL_NETNODE_INFO
+        geoCoor = this.getNewArr(geoCoor)
+        let doulDatas = this.getGeoData(geoCoor,myData)
+        let newData = this.getNewData(doulDatas)
+        let geoCoordMap = this.getGeoCoor(geoCoor)
+        this.rawData = this.getRawData(newData)
+        this.mapData = this.makeMapData(geoCoordMap,this.rawData)
       })
     },
 
     getGeoData(geoCoor,myData) {
-      return myData.map(function(item,index){
+      return myData.map((item,index) => {
         return Object.assign(geoCoor[index], myData[index])
       })
     },
 
-    getNewData(datas){
-      return datas.filter(function(item){
+    getNewData(doulDatas){
+      return doulDatas.filter((item) => {
         let patt = new RegExp("区"||"市")
         return patt.test(item["baidu_address"]) && item["REPORT_TIME"] && item["FINISH_TIME"] && item["FAULT_SYMPTOM"] && item["CUSTOMER_NAME"] && item["area"] && item["TASK_STATE"] && item["DEGREE_OF_ACUTE"]
 
       })
     },
 
-    getNewArr(newData) {
-      return newData.map(function(item,index){
-        var geo = {
+    getNewArr(geoCoor) {
+      return geoCoor.map((item,index) => {
+        let geo = {
           baidu_address: '',
           dimension: null,
           longitude: null,
           area:null
         }
-        for (var x in geo) {
+        for (let x in geo) {
           geo[x] = item[x]
         }
         return geo
@@ -95,10 +81,9 @@ export default{
     },
 
     getGeoCoor(geoCoor) {
-      var _geoCoordMap = {}
-
-      if(this.geoCoor){
-        this.geoCoor.forEach(function(item){
+      let _geoCoordMap = {}
+      if(geoCoor){
+        geoCoor.forEach((item) => {
           let arr = []
           let key = item["baidu_address"]
           arr.push(item["longitude"], item["dimension"])
@@ -109,7 +94,7 @@ export default{
     },
 
     getRawData(newData) {
-        return newData.map(function(item,index) {
+        return newData.map((item,index) => {
             let newArr = []
             newArr.push(item["baidu_address"], item["REPORT_TIME"].slice(5,7), item["REPORT_TIME"].slice(8,10), item["FINISH_TIME"].slice(8,10), item["CUSTOMER_NAME"], item["FAULT_SYMPTOM"], (item["baidu_address"].match(/市(\S*?)区/)[1] + "区"), item["area"], item["TASK_STATE"], item["DEGREE_OF_ACUTE"])
             return newArr
@@ -117,8 +102,8 @@ export default{
     },
 
     makeMapData(geoCoordMap,rawData) {
-      return rawData.map(function(item,index){
-          let geoCoord = geoCoordMap[rawData[index][0]];
+      return rawData.map((item,index) => {
+          let geoCoord = geoCoordMap[rawData[index][0]]
           if (geoCoord) {
               return {
                   name: rawData[index][0],
@@ -129,11 +114,9 @@ export default{
     },
 
     createOpt(rawData,schema,mapData) {
-      console.log(rawData,schema,mapData)
       let opt = {}
       return opt={
         title: {
-            // text: '北京市各银行报警分布',
             left: 'center',
             top: 5,
             itemGap: 0,
@@ -144,10 +127,10 @@ export default{
         },
         tooltip: {
           trigger: 'item',
-          formatter: function (params) {
-              var value = (params.value + '').split('.');
-              value = value[0].replace(/(\d{1,3})(?=(?:\d{3})+(?!\d))/g, '$1,') + '.' + value[1];
-              return params.seriesName + '<br/>' + params.name + ' : ' + value;
+          formatter: (params) => {
+              let value = (params.value + '').split('.')
+              value = value[0].replace(/(\d{1,3})(?=(?:\d{3})+(?!\d))/g, '$1,') + '.' + value[1]
+              return params.seriesName + '<br/>' + params.name + ' : ' + value
           }
         },
         toolbox: {
@@ -331,7 +314,6 @@ export default{
             normal: {
               color: '#3D59AB',
               width: 0.5,
-              // opacity: 0.6
             }
           },
           z: 300,

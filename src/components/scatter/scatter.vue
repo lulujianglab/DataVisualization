@@ -29,41 +29,41 @@ export default {
         let mixedData = this.removemixedData(faultData)
         mixedData = this.mapmixedData(mixedData)
 
-        this.myChart = echarts.init(document.getElementById("scatter"));
+        this.myChart = echarts.init(document.getElementById("scatter"))
         let scatterOption = this.createScatterOpt(fourData, fiveData, mixedData)
-        this.myChart.setOption(scatterOption);
+        this.myChart.setOption(scatterOption)
       })
     },
 
     // 过滤出报修和完成时间都在月份的记录
     removefourData(faultData) {
-      return faultData.filter(function(item){
+      return faultData.filter((item) => {
           return item.REPORT_TIME && item.REPORT_TIME.slice(5,7) === '04' && item.FINISH_TIME && item.FINISH_TIME.slice(5,7) === '04'
       })
     },
 
     // 过滤出报修和完成时间都在5月份的记录
     removefiveData(faultData) {
-      return faultData.filter(function(item){
+      return faultData.filter((item) => {
           return item.REPORT_TIME && item.REPORT_TIME.slice(5,7) === '05' && item.FINISH_TIME && item.FINISH_TIME.slice(5,7) === '05'
       })
     },
 
     // 过滤出报修在4月份和完成时间在5月份的记录
     removemixedData(faultData) {
-      return faultData.filter(function(item){
+      return faultData.filter((item) => {
           return item.REPORT_TIME && item.REPORT_TIME.slice(5,7) === '04' && item.FINISH_TIME && item.FINISH_TIME.slice(5,7) === '05'
       })
     },
 
     // 对4、5月份和4/5月份的数据记录过滤出REPORT_TIME、FINISH_TIME、FINISH_TIME与REPORT_TIME之差、FAULT_SYMPTOM
     mapData(arr){
-      return arr.map(function(item){
+      return arr.map((item) => {
           return [item.REPORT_TIME.slice(8,10),item.FINISH_TIME.slice(8,10),Number(item.FINISH_TIME.slice(8,10))-Number(item.REPORT_TIME.slice(8,10)),item.FAULT_SYMPTOM]
       })
     },
     mapmixedData(arr){
-      return arr.map(function(item){
+      return arr.map((item) => {
           return [item.REPORT_TIME.slice(8,10),item.FINISH_TIME.slice(8,10),30-Number(item.REPORT_TIME.slice(8,10))+Number(item.FINISH_TIME.slice(8,10)),item.FAULT_SYMPTOM]
       })
     },
@@ -100,14 +100,14 @@ export default {
             name: '4月份',
             data: fourData,
             type: 'scatter',
-            symbolSize: function (data) {
+            symbolSize: (data) => {
                 return data[2]
             },
             label: {
               emphasis: {
                 show: true,
-                formatter: function (param) {
-                    return param.data[3];
+                formatter: (param) => {
+                    return param.data[3]
                 },
                 position: 'top'
               }
@@ -124,14 +124,14 @@ export default {
               name: '5月份',
               data: fiveData,
               type: 'scatter',
-              symbolSize: function (data) {
+              symbolSize: (data) => {
                   return data[2]
               },
               label: {
                 emphasis: {
                   show: true,
-                  formatter: function (param) {
-                      return param.data[3];
+                  formatter: (param) => {
+                      return param.data[3]
                   },
                   position: 'top'
                 }
@@ -148,14 +148,14 @@ export default {
               name: '4月份报修5月份完成',
               data: mixedData,
               type: 'scatter',
-              symbolSize: function (data) {
+              symbolSize: (data) => {
                   return data[2]
               },
               label: {
                 emphasis: {
                   show: true,
-                  formatter: function (param) {
-                      return param.data[3];
+                  formatter: (param) => {
+                      return param.data[3]
                   },
                   position: 'top'
                 }

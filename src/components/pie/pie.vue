@@ -32,9 +32,8 @@ export default {
       })
     },
 
-    // 过滤出记录中RECEIVE_TASK_PERSON接警人员的字段
-    removePerson(faultData) {
-      return faultData.map(function(item){
+    removePerson(faultData) { // 过滤出记录中RECEIVE_TASK_PERSON接警人员的字段
+      return faultData.map((item) => {
           let obj = {
               name: ""
           }
@@ -45,10 +44,9 @@ export default {
       })
     },
 
-    // 累计各接警人员接单数
-    accumulatedPerson(receivePerson){
+    accumulatedPerson(receivePerson){ // 累计各接警人员接单数
       let obj = {}
-      receivePerson.forEach(function(item){
+      receivePerson.forEach((item) => {
           if(item['name'] && item['name'] != 'ceshi'){
               if(!obj[item['name']]){
                   obj[item['name']] = 1
@@ -60,11 +58,10 @@ export default {
       return obj
     },
 
-    // 重组成pie需要的数组对象
-    pieRawData(receivePerson) {
+    pieRawData(receivePerson) { // 重组成pie需要的数组对象
       let arr = [], selected = {}
-      var i = 0
-      for(var k in receivePerson){
+      let i = 0
+      for(let k in receivePerson){
           i++
           let obj = {
               name: "",
@@ -81,8 +78,7 @@ export default {
       }
     },
 
-    // 创建pie option
-    createPieOpt(pieData){
+    createPieOpt(pieData){ // 创建pie option
       let opt = {}
       return opt = {
         title: {

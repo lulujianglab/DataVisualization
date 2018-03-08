@@ -85,8 +85,8 @@ export default {
     //   }
     // },
     // _deepCopy(obj) {
-    //   let str, newobj;
-    //   str = newobj = obj.constructor === Array ? [] : {};
+    //   let str, newobj
+    //   str = newobj = obj.constructor === Array ? [] : {}
     //   if (typeof obj !== 'object') {
     //     return
     //   } else if (window.JSON) {
@@ -94,10 +94,10 @@ export default {
     //     newobj = JSON.parse(str) // 还原
     //   } else {
     //     for (var i in obj) {
-    //       newobj[i] = typeof obj[i] === 'object' ? cloneObj(obj[i]) : obj[i];
+    //       newobj[i] = typeof obj[i] === 'object' ? cloneObj(obj[i]) : obj[i]
     //     }
     //   }
-    //   return newobj;
+    //   return newobj
     // },
     // pro_toggle(pro, index) {
     //   pro.selected = !pro.selected

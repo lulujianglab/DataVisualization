@@ -10,7 +10,6 @@ import VueRouer from 'vue-router'
 // import 'element-ui/lib/theme-default/index.css'
 // Vue.use(ElementUI)
 
-import line from './components/line/line'
 import sort from './components/sort/sort'
 import parallelBD from './components/parallel/parallelBD'
 import pie from './components/pie/pie'
@@ -45,27 +44,24 @@ const router = new VueRouer({
     path: '/',
     redirect: parallelBD
   }, {
-    path: '/line',
-    component: line
-  },{
     path: '/sort',
     component: sort
-  },{
+  }, {
     path: '/parallelBD',
     component: parallelBD
-  },{
+  }, {
     path: '/pie',
     component: pie
-  },{
+  }, {
     path: '/scatter',
     component: scatter
-  },{
+  }, {
     path: '/treemap',
     component: treemap
-  },{
+  }, {
     path: '/multipleMap',
     component: multipleMap
-  },{
+  }, {
     path: '/dashboard',
     component: dashboard
   }],

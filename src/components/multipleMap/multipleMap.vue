@@ -39,20 +39,13 @@ export default{
         let coorData = datas.TBL_NETNODE_INFO
         coorData = this.getNewArr(coorData)
         let geoData = this.getGeoData(coorData,faultData)
-        let netnodePoints = this.getNetNode(geoData)
-        let markers = []
-        netnodePoints.forEach(function(points,index){
-            let x = points.lng;
-            let y = points.lat;
-            let newPoint = new BMap.Point(x,y);
-            markers.push(new BMap.Marker(newPoint));
-        })
+        let markers = this.getNetNode(geoData)
         let options = {
             markers:          markers,
             gridSize:         100,
             isAverangeCenter: true
         }
-        let markerClusterer = new BMapLib.MarkerClusterer(this.map, options);
+        let markerClusterer = new BMapLib.MarkerClusterer(this.map, options)
       })
     },
 
@@ -64,41 +57,36 @@ export default{
       this.mPoint = ev
     },
 
-    // 整合数组对象
-    getGeoData(coorData,faultData) {
-      return faultData.map(function(item,index){
+    getGeoData(coorData,faultData) { // 整合数组对象
+      return faultData.map((item,index) => {
         return Object.assign(coorData[index], faultData[index])
       })
     },
 
-    // 过滤数组对象元素
-    getNewArr(newData) {
-      return newData.map(function(item,index){
-        var geo = {
+    getNewArr(newData) { // 过滤数组对象元素
+      return newData.map((item,index) => {
+        let geo = {
             baidu_address: '',
             dimension: null,
             longitude: null,
             area:null,
             net_node_name: ''
         }
-        for (var x in geo) {
+        for (let x in geo) {
             geo[x] = item[x]
         }
         return geo
       })
     },
 
-    // z转换地理经纬度坐标
-    getNetNode(geoData) {
-      return geoData.map(function(item,index){
+    getNetNode(geoData) { // 转换地理经纬度坐标
+      return geoData.map((item,index) => {
           let lng = geoData[index].longitude
           let dim = geoData[index].dimension
           let tmpPoint = new BMap.Point(lng, dim)
-          return tmpPoint
+          return new BMap.Marker(tmpPoint)
       })
-    },
-
-
+    }
   }
 }
 </script>
@@ -106,8 +94,6 @@ export default{
 <style>
 #main {
   height: 100%;
-  /* width: 52%;
-  background-color: #F5F5F5; */
 }
 #title {
   position: relative;
@@ -121,6 +107,5 @@ export default{
  h2 {
     font-size: 15px;
     font-weight: bold;
-    /* padding-left: 20px; */
   }
 </style>

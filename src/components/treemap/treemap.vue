@@ -32,23 +32,21 @@ export default {
       })
     },
 
-    // 过滤出记录中的CUSTOMER_NAME字段
-    getCustomerName(faultData) {
-      return faultData.map(function(item){
-        var name = {
+    getCustomerName(faultData) { // 过滤出记录中的CUSTOMER_NAME字段
+      return faultData.map((item) => {
+        let name = {
             CUSTOMER_NAME: ''
         }
-        for (var y in name){
+        for (let y in name){
             name[y] = item[y]
         }
         return name
       })
     },
 
-    // CUSTOMER_NAME字段去重累加
-    removeDuplicatedName(customerName) {
-      var tmp = {}
-      customerName.forEach(function(item){
+    removeDuplicatedName(customerName) { // CUSTOMER_NAME字段去重累加
+      let tmp = {}
+      customerName.forEach((item) => {
         if (!tmp[item['CUSTOMER_NAME']]) {
             tmp[item['CUSTOMER_NAME']] = 1
         }else {
@@ -58,11 +56,10 @@ export default {
       return tmp
     },
 
-    // 重新组合成treemap需要的数据格式
-    treemapData(duplicatedName) {
+    treemapData(duplicatedName) { // 重新组合成treemap需要的数据格式
       let arr = []
-      for(var key in duplicatedName) {
-          var tmps = {
+      for(let key in duplicatedName) {
+          let tmps = {
               name: '',
               value: null
           }
@@ -73,14 +70,12 @@ export default {
       return arr
     },
 
-    // 创建treemap option
-    createTreemapOpt(treemapData){
+    createTreemapOpt(treemapData){ // 创建treemap option
       let opt = {}
       return opt = {
         title: {
             text: '客户银行数量情况',
             left: 'left',
-            // padding:1,
             textStyle: {
                 fontWeight: 'bold',
                 fontSize: 15

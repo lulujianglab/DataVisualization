@@ -34,10 +34,8 @@ export default{
       ak: 'ZUONbpqGBsYGXNIYHicvbAbM',
       name: '点值地图视觉优化之邮贴图',
       legendArr: this.$store.state.arr,
-      color: this.$store.state.color,
       rectangle_overlay: null,
       resX: null,resY: null,
-      txt: '',
     }
   },
   components: {
@@ -69,8 +67,7 @@ export default{
       this.mPoint = ev
     },
 
-    // 初始化矩形symbol
-    dragSymbol() {
+    dragSymbol() { // 初始化矩形symbol
       this.rectangle_overlay = new BMap.Marker(new BMap.Point(this.mPoint.lng,this.mPoint.lat), {
         icon: new BMap.Symbol(BMap_Symbol_SHAPE_RECTANGLE, { // 覆盖物更改为长4px，宽2px的矩形
             scale: 35, // 覆盖框增大比例
@@ -94,9 +91,8 @@ export default{
       this.resY = (geoPointRT.lat - geoPointLB.lat) / (pixelPointRT.y - pixelPointLB.y)
     },
 
-    // 获取数据、处理数据
-    getData() {
 
+    getData() { // 获取数据、处理数据
       axios.get('../../../static/data/troubleData.json').then((res) => {
         let datas = res.data[0]
         let faultData = datas.TBL_FAULT_LOG
@@ -105,8 +101,7 @@ export default{
         let geoData = this.getGeoData(coorData,faultData)
         let netnodePoints = this.getNetNode(geoData)
 
-        // 统计各报警数据
-        let alarm= []
+        let alarm= [] // 统计各报警数据
         alarm[0] = this.getAlarmData(geoData,"频繁报警")
         alarm[1] = this.getAlarmData(geoData,"专项巡检")
         alarm[2] = this.getAlarmData(geoData,"1106关机").concat(this.getAlarmData(geoData,"1106电话关机")).concat(this.getAlarmData(geoData,"关机"))
@@ -117,10 +112,7 @@ export default{
         alarm[7] = this.getAlarmData(geoData,"1106电话空号").concat(this.getAlarmData(geoData,"1106空号")).concat(this.getAlarmData(geoData,"1106卡已被用")).concat(this.getAlarmData(geoData,"1106故障"))
         alarm[8] = this.getAlarmData(geoData,"DVR不在线,").concat(this.getAlarmData(geoData,"dvr不在线")).concat(this.getAlarmData(geoData,"DVR故障"))
 
-        let self = this
-
-        // 地图添加svg图元
-        netnodePoints.forEach(function(points,index){
+        netnodePoints.forEach((points,index) => { // 地图添加svg图元
           let x = points.lng
           let y = points.lat
           let newPoint = new BMap.Point(x,y)
@@ -135,119 +127,65 @@ export default{
             let myIcon = new BMap.Icon("../../../static/img/ceshi3.svg", new BMap.Size(14,14))
              newMarker = new BMap.Marker(newPoint,{icon:myIcon})
           }
-          self.map.addOverlay(newMarker)
+          this.map.addOverlay(newMarker)
         })
 
         this.dragSymbol()
 
-        // 定义矩形框内点的数组
         let alarmArr =  new Array(9)
-        for(let i = 0;i < alarmArr.length; i++){
+        for(let i = 0;i < alarmArr.length; i++){ // 定义矩形框内点的数组
           alarmArr[i] = new Array()
         }
-        let lgArray = []
-        let firstChart={}, secondChart={}, thirdChart={}, fourthChart={}, fifthChart={}, sixthChart={}, seventhChart={}, eighthChart={}, ninthChart={}
-        // ------firstChart start----------
-        firstChart = echarts.init(document.getElementById("box1"));
-        this.txt = '设备停机'
-        let option1 = this.createOpt(this.txt,alarmArr[0],lgArray);
-        firstChart.setOption(option1);
-        // -----firstChart end-----------
 
-        // -----secondChart start-----
-        secondChart = echarts.init(document.getElementById("box2"));
-        this.txt = '视频丢失'
-        let option2 = this.createOpt(this.txt,alarmArr[1],lgArray)
-        secondChart.setOption(option2);
-        // -----secondChart end-----
+        let lgArray = [] // 定义矩形框拖动的次数
 
-        // ------thirdChart start----------
-        thirdChart = echarts.init(document.getElementById("box3"));
-        this.txt = '电池测试故障'
-        let option3 = this.createOpt(this.txt,alarmArr[2],lgArray);
-        thirdChart.setOption(option3);
-        // -----thirdChart end-----------
+        let chartArr =  new Array(9)
+        for(let i = 0;i < alarmArr.length; i++){ // 定义邮贴图chart的个数
+          chartArr[i] = {}
+        }
 
-        // -----fourthChart start-----
-        fourthChart = echarts.init(document.getElementById("box4"));
-        this.txt = '接触故障'
-        let option4 = this.createOpt(this.txt,alarmArr[3],lgArray)
-        fourthChart.setOption(option4);
-        // -----fourthChart end-----
+        let optArr =  new Array(9)
+        for(let i = 0;i < optArr.length; i++){ // 定义邮贴图option的个数
+          optArr[i] = {}
+        }
 
-        // ------fifthChart start----------
-        fifthChart = echarts.init(document.getElementById("box5"));
-        this.txt = '主机停机'
-        let option5 = this.createOpt(this.txt,alarmArr[4],lgArray);
-        fifthChart.setOption(option5);
-        // -----fifthChart end-----------
+        let txtArr = ['设备停机','视频丢失','电池测试故障','接触故障','主机停机','设备运行数','设备恢复数','感应器故障','长距离无限发射故障']
 
-        // -----sixthChart start-----
-        sixthChart = echarts.init(document.getElementById("box6"));
-        this.txt = '设备运行数'
-        let option6 = this.createOpt(this.txt,alarmArr[5],lgArray)
-        sixthChart.setOption(option6);
-        // -----sixthChart end-----
+        let childrens=this.delSpaceDom()
 
-        // ------seventhChart start----------
-        seventhChart = echarts.init(document.getElementById("box7"));
-        this.txt = '设备恢复数'
-        let option7 = this.createOpt(this.txt,alarmArr[6],lgArray);
-        seventhChart.setOption(option7);
-        // -----seventhChart end-----------
+        for(let i = 0; i < 9; i++){ // 遍历生成邮贴图
+          chartArr[i] = echarts.init(childrens[i]);
+          optArr[i] = this.createOpt(txtArr[i],alarmArr[i],lgArray);
+          chartArr[i].setOption(optArr[i]);
+        }
 
-        // -----eighthChart start-----
-        eighthChart = echarts.init(document.getElementById("box8"));
-        this.txt = '感应器故障'
-        let option8 = this.createOpt(this.txt,alarmArr[7],lgArray)
-        eighthChart.setOption(option8);
-        // -----eighthChart end-----
+        this.rectangle_overlay.addEventListener('dragend', () => { // 拖拽响应事件处理
+          let rStartX = this.rectangle_overlay.getPosition().lng - (this.resX * 160) // lng值
+          let rStartY = this.rectangle_overlay.getPosition().lat - (this.resY * 80) // lat值
+          let rEndX = this.rectangle_overlay.getPosition().lng + (this.resX * 160) // lng值
+          let rEndY = this.rectangle_overlay.getPosition().lat + (this.resY * 80) // lat值
 
-        // ------ninthChart start----------
-        ninthChart = echarts.init(document.getElementById("box9"));
-        this.txt = '长距离无限发射故障'
-        let option9 = this.createOpt(this.txt,alarmArr[8],lgArray);
-        ninthChart.setOption(option9);
-        // -----ninthChart end-----------
-
-        // 拖拽响应事件处理
-        this.rectangle_overlay.addEventListener('dragend', function(){
-          let rStartX = self.rectangle_overlay.getPosition().lng - (self.resX * 160) // lng值
-          let rStartY = self.rectangle_overlay.getPosition().lat - (self.resY * 80) // lat值
-          let rEndX = self.rectangle_overlay.getPosition().lng + (self.resX * 160) // lng值
-          let rEndY = self.rectangle_overlay.getPosition().lat + (self.resY * 80) // lat值
-
-          // 过滤出框内的报警数
-          for(let i = 0; i < 9; i++){
-            alarmArr[i].push(self.checkPoint(alarm[i],rEndY,rStartY,rStartX,rEndX))
+          for(let i = 0; i < 9; i++){ // 过滤出框内的报警数
+            alarmArr[i].push(this.checkPoint(alarm[i],rEndY,rStartY,rStartX,rEndX))
           }
 
-          // 每拖动一次就重新刷新一次echarts图表
-          firstChart.setOption(option1)
-          secondChart.setOption(option2)
-          thirdChart.setOption(option3)
-          fourthChart.setOption(option4)
-          fifthChart.setOption(option5)
-          sixthChart.setOption(option6)
-          seventhChart.setOption(option7)
-          eighthChart.setOption(option8)
-          ninthChart.setOption(option9)
+          for(let i = 0; i < 9; i++){ // 每拖动一次就重新刷新一次echarts图表
+            chartArr[i].setOption(optArr[i])
+          }
 
           lgArray.push(alarmArr[0].length)
         })
       })
     },
 
-    // 对象合并
-    getGeoData(coorData,faultData) {
-      return faultData.map(function(item,index){
+    getGeoData(coorData,faultData) { // 地理坐标对象合并
+      return faultData.map((item,index) => {
           return Object.assign(coorData[index], faultData[index])
       })
     },
 
-    // 过滤出地图需要的数据
-    getNewArr(newData) {
-      return newData.map(function(item,index){
+    getNewArr(newData) { // 过滤出地图需要的数据
+      return newData.map((item,index) => {
           let geo = {
             baidu_address: '',
             dimension: null,
@@ -262,19 +200,17 @@ export default{
       })
     },
 
-    // 获取地图经纬度坐标
-    getNetNode(geoData) {
-      return geoData.map(function(item,index){
+    getNetNode(geoData) { // 获取地图经纬度坐标
+      return geoData.map((item,index) => {
         let lng = geoData[index].longitude
         let dim = geoData[index].dimension
         return new BMap.Point(lng, dim)
       })
     },
 
-    // 确定框内报警数
-    checkPoint(points,rEndY,rStartY,rStartX,rEndX) {
+    checkPoint(points,rEndY,rStartY,rStartX,rEndX) { // 确定框内报警数
       let pts = []
-      points.forEach(function(point,index){
+      points.forEach((point,index) => {
           let y=point.dimension
           let x=point.longitude
           if (y >= rEndY && y <= rStartY){
@@ -286,15 +222,24 @@ export default{
       return pts.length || 0
     },
 
-    // 过滤出各报警类型的记录
-    getAlarmData(geoData,alarmStr){
-      return geoData.filter(function(item){
+    getAlarmData(geoData,alarmStr){ // 过滤出各报警类型的记录
+      return geoData.filter((item) => {
         return item.FAULT_SYMPTOM === alarmStr
       })
     },
 
-    // option滑动条组装
-    createDataZoom() {
+    delSpaceDom() { // 过滤出div子节点个数
+      let parentNode = document.getElementById('container')
+      let sub_child = parentNode.childNodes
+      for (let i = 0; i < sub_child.length; i++) {
+        if(sub_child[i].nodeName == '#text'){
+          parentNode.removeChild(sub_child[i])
+        }
+      }
+      return parentNode.childNodes
+    },
+
+    createDataZoom() { // option滑动条组装
       let dataZoom = []
       return dataZoom = [
         {
@@ -332,8 +277,7 @@ export default{
       ]
     },
 
-    // 初始化option
-    createOpt(txt,datax,lgArray) {
+    createOpt(txt,datax,lgArray) { // 初始化option
       let option = {}
       return option = {
           title : {
