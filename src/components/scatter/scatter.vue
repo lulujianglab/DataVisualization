@@ -83,7 +83,7 @@ export default {
         },
         legend: {
             right: 10,
-            data: ['4月份', '5月份', '4月份报修5月份完成']
+            data: ['9月份', '10月份', '9月份报修10月份完成']
         },
         xAxis: {
             splitLine: {
@@ -97,7 +97,7 @@ export default {
             scale: true
         },
           series: [{
-            name: '4月份',
+            name: '9月份',
             data: fourData,
             type: 'scatter',
             symbolSize: (data) => {
@@ -121,7 +121,7 @@ export default {
               }
             }
           }, {
-              name: '5月份',
+              name: '10月份',
               data: fiveData,
               type: 'scatter',
               symbolSize: (data) => {
@@ -145,7 +145,7 @@ export default {
                 }
               }
           }, {
-              name: '4月份报修5月份完成',
+              name: '9月份报修10月份完成',
               data: mixedData,
               type: 'scatter',
               symbolSize: (data) => {

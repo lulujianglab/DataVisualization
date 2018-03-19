@@ -189,15 +189,15 @@ export default{
           {dim: 8, name: schema[8]},
           {dim: 9, name: schema[9]}, // 类目数组，在类目轴type为category时
         ],
-        // visualMap: { // 视觉映射组件
-        //   show: true,
-        //   min: 10,
-        //   max: 30,
-        //   dimension: 2,
-        //   inRange: {
-        //       color: ['#d94e5d','#eac736','#50a3ba'].reverse(),
-        //   }
-        // },
+        visualMap: { // 视觉映射组件
+          show: true,
+          min: 10,
+          max: 30,
+          dimension: 2,
+          inRange: {
+              color: ['#fec42c','#80F1BE','#dd4444'].reverse(),
+          }
+        },
         grid: [{
           show: true,
           left: 0,
