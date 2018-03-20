@@ -24,6 +24,9 @@ module.exports = {
   entry: {
     app: './src/main.js'
   },
+  externals: {
+    "echarts": "echarts"
+  },
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
