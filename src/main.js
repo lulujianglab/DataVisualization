@@ -3,20 +3,16 @@
 import Vue from 'vue'
 import App from './App'
 import Vuex from 'vuex'
-import VueRouer from 'vue-router'
+import VueRouter from 'vue-router'
 
 // 全局引用ElementUI组件
 // import ElementUI from 'element-ui'
 // import 'element-ui/lib/theme-default/index.css'
 // Vue.use(ElementUI)
 
-import sort from './components/sort/sort'
-import parallelBD from './components/parallel/parallelBD'
-import pie from './components/pie/pie'
-import scatter from './components/scatter/scatter'
-import treemap from './components/treemap/treemap'
-import multipleMap from './components/multipleMap/multipleMap'
-import dashboard from './components/dashboard/dashboard'
+
+// 引入路由
+import router from "./router"
 
 // 引入数据
 import data from '../static/data/trouble-data.js'
@@ -26,9 +22,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 import {DatePicker} from 'element-ui'
 Vue.component(DatePicker.name, DatePicker)
 
-Vue.use(VueRouer)
+// Vue.use(VueRouter)
 Vue.use(Vuex)
-
 
 const store = new Vuex.Store({
   state: {
@@ -37,35 +32,6 @@ const store = new Vuex.Store({
     areaArr: [{name: '石景山区'},{name: '西城区'},{name: '东城区'},{name: '朝阳区'},{name: '通州区'}],
     data: datas
   }
-});
-
-const router = new VueRouer({
-  routes: [{
-    path: '/',
-    redirect: parallelBD
-  }, {
-    path: '/sort',
-    component: sort
-  }, {
-    path: '/parallelBD',
-    component: parallelBD
-  }, {
-    path: '/pie',
-    component: pie
-  }, {
-    path: '/scatter',
-    component: scatter
-  }, {
-    path: '/treemap',
-    component: treemap
-  }, {
-    path: '/multipleMap',
-    component: multipleMap
-  }, {
-    path: '/dashboard',
-    component: dashboard
-  }],
-  linkActiveClass: 'active'
 })
 
 // 设置为 false 以阻止 vue 在启动时生成生产提示
@@ -74,7 +40,7 @@ const router = new VueRouer({
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  router,
+  router, // 注入到根实例
   store,
   components: { App },
   template: '<App/>'

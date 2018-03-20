@@ -25,6 +25,7 @@ import {MP} from '../../map.js'
 import header from '../header/header'
 import filter from '../filter/filter'
 import map from '../map/map'
+import echarts from 'echarts'
 
 export default{
   data() {
