@@ -14,3 +14,5 @@ npm install
 ```bash
 npm run dev
 ```
+
+[结果界面](https://github.com/lulujianglab/DataVisualization/issues/1)
