@@ -90,7 +90,6 @@ export default{
     margin: 0px;
     padding: 0px;
     background-color: #F5F5F5;
-    background-size: 100% 100%;
 }
 .item{
     padding: 0px;

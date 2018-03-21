@@ -1,25 +1,23 @@
-<template>
-  <div style="height: 100%; margin: 0">
+<template lang="html">
+  <div id="content">
     <v-header :name="name" :legendArr="legendArr"></v-header>
     <v-filter ></v-filter>
-    <div id="content">
-      <div id="main">
+    <div id="main">
       <v-map ref="useMap" @map="onMap" @point="onPoint"></v-map>
-      </div>
-      <div id="container">
-          <div id="box1"></div>
-          <div id="box2"></div>
-          <div id="box3"></div>
-          <div id="box4"></div>
-          <div id="box5"></div>
-          <div id="box6"></div>
-          <div id="box7"></div>
-          <div id="box8"></div>
-          <div id="box9"></div>
-      </div>
+    </div>
+    <div id="container">
+        <div id="box1"></div>
+        <div id="box2"></div>
+        <div id="box3"></div>
+        <div id="box4"></div>
+        <div id="box5"></div>
+        <div id="box6"></div>
+        <div id="box7"></div>
+        <div id="box8"></div>
+        <div id="box9"></div>
     </div>
   </div>
-  </template>
+</template>
 
 <script>
 import axios from 'axios'
@@ -368,6 +366,7 @@ export default{
   height: 100%;
   width: 100%;
   margin: 0;
+  padding: 0px;
   background-color: #F5F5F5;
 }
 #main {
