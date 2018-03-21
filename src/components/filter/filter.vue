@@ -146,7 +146,7 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 .filter {
   position: relative;
   display: flex;

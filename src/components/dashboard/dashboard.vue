@@ -78,11 +78,12 @@ export default{
   }
 }
 </script>
-
 <style>
 *{
   box-sizing: border-box;
 }
+</style>
+<style scoped>
 .dashboard{
     position: relative;
     width: 100%;

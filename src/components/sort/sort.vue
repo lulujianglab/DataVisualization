@@ -360,7 +360,7 @@ export default{
 }
 </script>
 
-<style>
+<style scoped>
 #content {
   position: relative;
   height: 100%;

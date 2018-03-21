@@ -122,7 +122,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #main {
   height: 100%;
   background-color: #F5F5F5;

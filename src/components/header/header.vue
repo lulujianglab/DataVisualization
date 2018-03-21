@@ -74,7 +74,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .title {
   position: relative;
   display: flex;

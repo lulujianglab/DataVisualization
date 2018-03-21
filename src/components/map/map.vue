@@ -40,7 +40,7 @@ export default{
 }
 </script>
 
-<style>
+<style scoped>
 #allmap {
   /* width: 52%; */
   height: 100%;
