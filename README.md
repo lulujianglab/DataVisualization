@@ -19,3 +19,4 @@ npm run dev
 
 [dashboard](https://lulujianglab.github.io/DataVisualization/#/dashboard)
 [parallelBD](https://lulujianglab.github.io/DataVisualization/#/parallelBD)
+[sort](https://lulujianglab.github.io/DataVisualization/#/sort)
