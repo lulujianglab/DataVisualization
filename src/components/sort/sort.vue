@@ -362,6 +362,7 @@ export default{
 
 <style>
 #main {
+  position: absolute;
   height: 100%;
   width: 52%;
   float: left;
@@ -374,9 +375,9 @@ export default{
   background-color: #F5F5F5;
 }
 #box1,#box2,#box3,#box4,#box5,#box6,#box7,#box8,#box9 {
-            width: 30%;
-            display: inline-block;
-            height: 180px;
-            margin: 1%;
-        }
+  width: 30%;
+  display: inline-block;
+  height: 180px;
+  margin: 1%;
+}
 </style>
