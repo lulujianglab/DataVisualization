@@ -2,19 +2,21 @@
   <div style="height: 100%; margin: 0">
     <v-header :name="name" :legendArr="legendArr"></v-header>
     <v-filter ></v-filter>
-    <div id="main">
-    <v-map ref="useMap" @map="onMap" @point="onPoint"></v-map>
-    </div>
-    <div id="container">
-        <div id="box1"></div>
-        <div id="box2"></div>
-        <div id="box3"></div>
-        <div id="box4"></div>
-        <div id="box5"></div>
-        <div id="box6"></div>
-        <div id="box7"></div>
-        <div id="box8"></div>
-        <div id="box9"></div>
+    <div id="content">
+      <div id="main">
+      <v-map ref="useMap" @map="onMap" @point="onPoint"></v-map>
+      </div>
+      <div id="container">
+          <div id="box1"></div>
+          <div id="box2"></div>
+          <div id="box3"></div>
+          <div id="box4"></div>
+          <div id="box5"></div>
+          <div id="box6"></div>
+          <div id="box7"></div>
+          <div id="box8"></div>
+          <div id="box9"></div>
+      </div>
     </div>
   </div>
   </template>
@@ -361,6 +363,13 @@ export default{
 </script>
 
 <style>
+#content {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  background-color: #F5F5F5;
+}
 #main {
   position: absolute;
   height: 100%;
