@@ -371,7 +371,6 @@ export default{
   background-color: #F5F5F5;
 }
 #main {
-  position: absolute;
   height: 100%;
   width: 52%;
   float: left;
