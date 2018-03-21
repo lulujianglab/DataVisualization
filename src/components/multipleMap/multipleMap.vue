@@ -33,7 +33,7 @@ export default{
   },
   methods: {
     getData(){
-      axios.get('../../../static/data/troubleData.json').then((res) => {
+      axios.get('static/data/troubleData.json').then((res) => {
         let datas = res.data[0]
         let faultData = datas.TBL_FAULT_LOG
         let coorData = datas.TBL_NETNODE_INFO

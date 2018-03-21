@@ -18,7 +18,7 @@ export default {
   },
   methods: {
     getData() {
-      axios.get('../../../static/data/troubleData.json').then((res) => {
+      axios.get('static/data/troubleData.json').then((res) => {
         let data = res.data[0]
         let faultData = data.TBL_FAULT_LOG
         let customerName = this.getCustomerName(faultData)
