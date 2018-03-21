@@ -8,7 +8,7 @@
 
 <script>
 import axios from 'axios'
-import {MP} from '../../map.js'
+import {MP} from '../../../static/js/map.js'
 import header from '../header/header'
 import filter from '../filter/filter'
 

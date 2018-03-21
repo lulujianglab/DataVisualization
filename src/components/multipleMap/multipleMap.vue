@@ -9,7 +9,7 @@
 
 <script>
 import axios from 'axios'
-import {MP} from '../../map.js'
+import {MP} from '../../../static/js/map.js'
 import map from '../map/map'
 
 export default{

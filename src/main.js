@@ -15,7 +15,7 @@ import VueRouter from 'vue-router'
 import router from "./router"
 
 // 引入数据
-import data from '../static/data/trouble-data.js'
+// import data from '../static/data/trouble-data.js'
 
 // 只引入日历组件
 import 'element-ui/lib/theme-chalk/index.css'
@@ -30,7 +30,6 @@ const store = new Vuex.Store({
     color: ['#9CC2B0', '#C98769','#6D9EA8', '#9CC2B0', '#C98769'],
     arr: [{name: '中国银行'},{name: '建设银行'},{name: '邮储银行'}],
     areaArr: [{name: '石景山区'},{name: '西城区'},{name: '东城区'},{name: '朝阳区'},{name: '通州区'}],
-    data: datas
   }
 })
 
