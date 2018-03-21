@@ -119,13 +119,14 @@ export default{
           let newMarker = {}
           if (index < 300) {
             let myIcon = new BMap.Icon("static/img/ceshi1.svg", new BMap.Size(14,14))
-             newMarker = new BMap.Marker(newPoint,{icon:myIcon})
+            console.log(myIcon)
+            newMarker = new BMap.Marker(newPoint,{icon:myIcon})
           }else if (index > 300 && index < 600) {
             let myIcon = new BMap.Icon("static/img/ceshi2.svg", new BMap.Size(14,14))
-             newMarker = new BMap.Marker(newPoint,{icon:myIcon})
+            newMarker = new BMap.Marker(newPoint,{icon:myIcon})
           }else {
             let myIcon = new BMap.Icon("static/img/ceshi3.svg", new BMap.Size(14,14))
-             newMarker = new BMap.Marker(newPoint,{icon:myIcon})
+            newMarker = new BMap.Marker(newPoint,{icon:myIcon})
           }
           this.map.addOverlay(newMarker)
         })
