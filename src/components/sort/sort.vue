@@ -119,7 +119,6 @@ export default{
           let newMarker = {}
           if (index < 300) {
             let myIcon = new BMap.Icon("static/img/ceshi1.svg", new BMap.Size(14,14))
-            console.log(myIcon)
             newMarker = new BMap.Marker(newPoint,{icon:myIcon})
           }else if (index > 300 && index < 600) {
             let myIcon = new BMap.Icon("static/img/ceshi2.svg", new BMap.Size(14,14))
