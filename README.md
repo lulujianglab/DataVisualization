@@ -15,6 +15,12 @@ npm install
 npm run dev
 ```
 
+### 编译环境
+
+```bash
+npm run build
+```
+
 [结果界面](https://github.com/lulujianglab/DataVisualization/issues/1)
 
 [dashboard](https://lulujianglab.github.io/DataVisualization/#/dashboard)
