@@ -3,7 +3,7 @@
     <h1>{{name}}</h1>
     <div class="legend-wrapper">
       <ul>
-        <li v-for="(legend,index) in legendArr" v-on:mouseout="donwplay(index)" v-on:mouseover="highlight(index)" :style="styleArr[index]" @click="legendToggle(legend)">
+        <li v-for="(legend,index) in legendArr" v-on:mouseout="donwplay(index)" v-on:mouseover="highlight(index)" :style="styleArr[index]" @click="legendToggle(legend)" :key="index">
           {{legend.name}}
         </li>
       </ul>
@@ -11,7 +11,7 @@
   </div>
 </template>
 
-<script>
+<script scoped>
 export default {
   props: { // 子组件要显式地用 props 选项声明它期待获得的数据
     legendArr: {

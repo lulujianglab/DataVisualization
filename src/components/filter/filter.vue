@@ -146,6 +146,12 @@ export default {
 
 </script>
 
+<style>
+.el-input__inner {
+  background-color: #F5F5F5;
+  border: none;
+}
+</style>
 <style scoped>
 .filter {
   position: relative;
@@ -167,7 +173,7 @@ export default {
     background: transparent;
     border: none;
     color: #3D59AB;
-  }
+}
 .filter .timeText {
     /* opacity: 0.69; */
     padding-right: 7px;

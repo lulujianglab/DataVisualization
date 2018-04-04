@@ -2,7 +2,7 @@
   <span class="v-checkbox" :class="{'checked':isChecked}"></span>
 </template>
 
-<script>
+<script scoped>
 export default {
   props: {
     isChecked: {
