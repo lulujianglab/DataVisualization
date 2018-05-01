@@ -11,7 +11,7 @@
   </div>
 </template>
 
-<script>
+<script scoped>
 export default {
   props: { // 子组件要显式地用 props 选项声明它期待获得的数据
     legendArr: {
