@@ -1,7 +1,7 @@
 <template>
 <div id="main">
   <v-header :name="name" :legendArr="legendArr"></v-header>
-  <v-filter ></v-filter>
+  <v-filter></v-filter>
   <div id="container"></div>
 </div>
 </template>
@@ -325,7 +325,6 @@ export default{
   }
 }
 </script>
-
 <style scoped>
 #main {
   height: 100%;

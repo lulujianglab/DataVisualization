@@ -5,6 +5,9 @@
       <el-date-picker
         v-model="startDate"
         type="date"
+        @change = "startDateChange"
+        format="yyyy-MM-dd"
+        value-format="yyyy-MM-dd"
         placeholder="选择日期">
       </el-date-picker>
       <div class="myCalendar"></div>
@@ -14,6 +17,9 @@
       <el-date-picker
         v-model="endDate"
         type="date"
+        @change = "endDateChange"
+        format="yyyy-MM-dd"
+        value-format="yyyy-MM-dd"
         placeholder="选择日期">
       </el-date-picker>
       <div class="myCalendar"></div>
@@ -65,6 +71,14 @@ export default {
   //   this._init()
   // },
   methods: {
+    startDateChange(val) {
+      this.startDate = val
+      this.$emit("listenstartDate",this.startDate)
+    },
+    endDateChange(val) {
+      this.endDate = val
+      this.$emit("listenendDate",this.endDate)
+    }
     // _init() {
     //   this.prevClass = this.$parent.$el._prevClass // undefined
     //   this.option = this.myChart.getOption()

@@ -3,7 +3,7 @@
     <h1>{{name}}</h1>
     <div class="legend-wrapper">
       <ul>
-        <li v-for="(legend,index) in legendArr" v-on:mouseout="donwplay(index)" v-on:mouseover="highlight(index)" :style="styleArr[index]" @click="legendToggle(legend)">
+        <li v-for="(legend,index) in legendArr" v-on:mouseout="donwplay(index)" v-on:mouseover="highlight(index)" :style="styleArr[index]" @click="legendToggle(legend)" :key="index">
           {{legend.name}}
         </li>
       </ul>
@@ -60,8 +60,10 @@ export default {
       this.changeStyle()
     },
     changeStyle() {
-      this.legendArr.forEach((data, index) => {
+      let num = 0
+      this.legendArr.forEach((data, index) => {     
         if (data.selected) {
+          num++
           this.styleArr[index].background = this.color[index]
           this.styleArr[index].border = '1px solid' + this.color[index]
         } else {
@@ -69,6 +71,8 @@ export default {
           this.styleArr[index].border = '1px solid #9C8C84'
         }
       })
+      // console.log(num)
+      this.$emit("listenNum",num)
     }
   }
 }

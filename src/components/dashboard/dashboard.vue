@@ -1,19 +1,19 @@
 <template lang="html">
   <div class="dashboard">
-    <v-header :name="name" :legendArr="legendArr"></v-header>
-    <v-filter ></v-filter>
+    <v-header :name="name" :legendArr="legendArr" v-on:listenNum = "showNum"></v-header>
+    <v-filter v-on:listenstartDate = "showstartDate" v-on:listenendDate = "showendDate"></v-filter>
     <div class="flex-container column">
         <div class="item one" @click="clickChart('1')" style="transform: translate(-22.4%,-33.5%) scale(0.33)">
-          <treemap></treemap>
+          <treemap :diffTime = 'timeDiff' :diffNum = 'num'></treemap>
         </div>
         <div class="item two" @click="clickChart('2')" style="transform: translate(-22.4%,0.5%) scale(0.33)">
-          <scatter></scatter>
+          <scatter :diffTime = 'timeDiff' :diffNum = 'num'></scatter>
         </div>
         <div class="item three" @click="clickChart('3')" style="transform: translate(-22.4%,34.5%) scale(0.33)">
-          <pie></pie>
+          <pie :diffTime = 'timeDiff' :diffNum = 'num'></pie>
         </div>
         <div class="item four active" @click="clickChart('4')" style="transform: translate(43.7%, 0) scale(1)">
-          <multipleMap></multipleMap>
+          <multipleMap :diffTime = 'timeDiff' :diffNum = 'num'></multipleMap>
         </div>
     </div>
   </div>
@@ -33,10 +33,17 @@ export default{
       items: [],
       name: '点值地图视觉优化之多视图协同可视化',
       legendArr: this.$store.state.areaArr,
+      timeDiff: {
+        startTime: '2017-04-12',
+        endTime: '2017-05-27'
+      },
+      num: null
     }
   },
   mounted() {
     this.init()
+    this.showstartDate()
+    this.showendDate()
   },
   methods: {
     init() { // 初始化items的order属性
@@ -66,7 +73,20 @@ export default{
       let transform2 = el2.style.transform
       el1.style.transform = transform2
       el2.style.transform = transform1
+    },
+
+    showstartDate(data) {
+      this.timeDiff.startTime = data
+    },
+
+    showendDate(data) {
+      this.timeDiff.endTime = data
+    },
+
+    showNum(data) {
+      this.num = data
     }
+
   },
   components: {
     treemap,
