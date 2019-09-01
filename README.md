@@ -1,6 +1,6 @@
 # DataVisulization
 
-> DataVisulization project
+> 一个多维时空交互的可视化项目
 
 
 ## 安装环境
