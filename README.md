@@ -3,23 +3,25 @@
 > DataVisulization project
 
 
-### 安装环境
+## 安装环境
 
 ```bash
 npm install
 ```
 
-### 运行环境
+## 运行环境
 
 ```bash
 npm run dev
 ```
 
-### 编译环境
+## 编译环境
 
 ```bash
 npm run build
 ```
+
+## 界面效果展示
 
 ### 可点击切换图表位置的dashboard
 
@@ -33,7 +35,7 @@ npm run build
 
 ![5 5_2](https://user-images.githubusercontent.com/26807227/37639357-0b97d142-2c4c-11e8-9806-c8fa4790462d.png)
 
-###地图与邮贴图交互
+### 地图与邮贴图交互
 
 ![1](https://user-images.githubusercontent.com/26807227/37639448-5e656100-2c4c-11e8-9340-111a4cac5dd4.png)
 
